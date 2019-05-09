@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: pacienti-service
+  profiles:
+    active:
+      default
+  h2:
+    console:
+      enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/pacientiservice?useSSL=false
+    username: admin
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
