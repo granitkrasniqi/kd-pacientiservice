@@ -6,6 +6,7 @@ import com.karteladentare.kdpacientiservice.repository.PacientiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,14 @@ public class PacientiService {
     }
 
     public Pacienti shtoPacientin(Pacienti pacienti) {
+        // set today as the date of registration
+        LocalDate today = LocalDate.now();
+        pacienti.setDataRegjistrimit(today);
+
+        // set aktiv attribute to true
+        pacienti.setAktiv(true);
+
+        // save patient
         return pacientiRepository.save(pacienti);
     }
 

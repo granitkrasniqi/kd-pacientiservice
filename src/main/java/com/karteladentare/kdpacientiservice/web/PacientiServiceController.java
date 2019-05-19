@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path = "/v1/api/pacienti-service", produces = "application/json")
+@RequestMapping(path = "/v1/pacientet", produces = "application/json")
 public class PacientiServiceController {
 
     @Autowired
