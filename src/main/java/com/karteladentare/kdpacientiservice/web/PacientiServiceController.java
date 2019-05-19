@@ -21,6 +21,21 @@ public class PacientiServiceController {
         return pacientiService.ktheTeGjithPacientet();
     }
 
+    @GetMapping("/statusi")
+    public Iterable<Pacienti> kthePacientetSipasAktiv(@RequestParam(value = "aktiv", defaultValue = "true") Boolean aktiv) {
+        return pacientiService.ktheTeGjithPacientetSipasAktiv(aktiv);
+    }
+
+    @GetMapping("/{pacientiId}")
+    public Pacienti kthePacientin(@PathVariable("pacientiId") Long pacientiId) {
+        try {
+            return pacientiService.kthePacientin(pacientiId);
+        } catch (PacientiNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Pacienti shtoPacientin(@RequestBody Pacienti pacienti) {
@@ -42,7 +57,12 @@ public class PacientiServiceController {
     @DeleteMapping("/{pacientiId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void fshijPacientin(@PathVariable("pacientiId") Long pacientiId) {
-        pacientiService.fshijPacientin(pacientiId);
+        try {
+            pacientiService.fshijPacientin(pacientiId);
+        } catch (PacientiNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
 

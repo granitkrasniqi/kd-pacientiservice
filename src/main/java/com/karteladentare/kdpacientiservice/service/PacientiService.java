@@ -17,7 +17,11 @@ public class PacientiService {
     private PacientiRepository pacientiRepository;
 
     public List<Pacienti> ktheTeGjithPacientet() {
-        return pacientiRepository.findAll();
+        return pacientiRepository.findAllAktiv();
+    }
+
+    public List<Pacienti> ktheTeGjithPacientetSipasAktiv(boolean aktiv) {
+        return pacientiRepository.findAllByAktiv(aktiv);
     }
 
     public Pacienti shtoPacientin(Pacienti pacienti) {
@@ -42,7 +46,25 @@ public class PacientiService {
         }
     }
 
-    public void fshijPacientin(Long pacientiId) {
-        pacientiRepository.deleteById(pacientiId);
+    public void fshijPacientin(Long pacientiId) throws PacientiNotFoundException {
+//        pacientiRepository.deleteById(pacientiId);
+        Optional<Pacienti> pacientiOptional = pacientiRepository.findById(pacientiId);
+        if (pacientiOptional.isPresent()) {
+            Pacienti p = pacientiOptional.get();
+            // set pacienti aktiv status to false
+            p.setAktiv(false);
+            pacientiRepository.save(p);
+        } else {
+            throw new PacientiNotFoundException("Pacienti nuk egziston");
+        }
+    }
+
+    public Pacienti kthePacientin(Long pacientiId) throws PacientiNotFoundException {
+        Optional<Pacienti> pacientiOptional = pacientiRepository.findById(pacientiId);
+        if (pacientiOptional.isPresent()) {
+            return pacientiOptional.get();
+        } else {
+            throw new PacientiNotFoundException("Pacienti nuk egziston");
+        }
     }
 }
