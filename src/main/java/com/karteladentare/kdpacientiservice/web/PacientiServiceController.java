@@ -65,6 +65,11 @@ public class PacientiServiceController {
         }
     }
 
+    @GetMapping("/numriPacienteve")
+    public long numriTotalPacienteve() {
+        return pacientiService.numriTotalPacienteve();
+    }
+
 
 
 }

@@ -46,6 +46,10 @@ public class PacientiService {
         }
     }
 
+    public long numriTotalPacienteve() {
+        return pacientiRepository.count();
+    }
+
     public void fshijPacientin(Long pacientiId) throws PacientiNotFoundException {
 //        pacientiRepository.deleteById(pacientiId);
         Optional<Pacienti> pacientiOptional = pacientiRepository.findById(pacientiId);
