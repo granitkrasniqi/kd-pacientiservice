@@ -1,6 +1,7 @@
 package com.karteladentare.kdpacientiservice.service;
 
 import com.karteladentare.kdpacientiservice.domain.Pacienti;
+import com.karteladentare.kdpacientiservice.exceptions.PacientiExistsException;
 import com.karteladentare.kdpacientiservice.exceptions.PacientiNotFoundException;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface PacientiService {
 
     List<Pacienti> ktheTeGjithPacientetSipasAktiv(boolean aktiv);
 
-    Pacienti shtoPacientin(Pacienti pacienti);
+    Pacienti shtoPacientin(Pacienti pacienti) throws PacientiExistsException;
 
     Pacienti perditesoPacientin(Pacienti pacienti)
             throws PacientiNotFoundException;

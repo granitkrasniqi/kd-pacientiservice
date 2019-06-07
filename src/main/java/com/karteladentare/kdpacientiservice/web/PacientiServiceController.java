@@ -1,6 +1,7 @@
 package com.karteladentare.kdpacientiservice.web;
 
 import com.karteladentare.kdpacientiservice.domain.Pacienti;
+import com.karteladentare.kdpacientiservice.exceptions.PacientiExistsException;
 import com.karteladentare.kdpacientiservice.exceptions.PacientiNotFoundException;
 import com.karteladentare.kdpacientiservice.service.PacientiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,16 @@ public class PacientiServiceController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Pacienti shtoPacientin(@RequestBody Pacienti pacienti) {
-        return pacientiService.shtoPacientin(pacienti);
+        try {
+            return pacientiService.shtoPacientin(pacienti);
+        } catch (PacientiExistsException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, e.getMessage()
+            );
+        }
     }
 
-    @PutMapping(path = "/{pacientiId}")
+    @PutMapping("/{pacientiId}")
     public Pacienti perditesoPacientin(@PathVariable("pacientiId") Long pacientiId,
                                        @RequestBody Pacienti pacienti) {
         try {

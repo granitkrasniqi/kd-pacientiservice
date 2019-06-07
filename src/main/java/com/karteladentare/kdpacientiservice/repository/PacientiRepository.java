@@ -6,10 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PacientiRepository extends JpaRepository<Pacienti, Long> {
     @Query("SELECT p FROM Pacienti p WHERE p.aktiv = true")
-    public List<Pacienti> findAllAktiv();
-    public List<Pacienti> findAllByAktiv(boolean aktiv);
+    List<Pacienti> findAllAktiv();
+    List<Pacienti> findAllByAktiv(boolean aktiv);
+    Optional<Pacienti> findByNumriPersonal(Long numriPersonal);
 }

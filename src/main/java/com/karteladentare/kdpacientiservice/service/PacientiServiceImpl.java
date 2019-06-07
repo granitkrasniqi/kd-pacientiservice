@@ -1,6 +1,7 @@
 package com.karteladentare.kdpacientiservice.service;
 
 import com.karteladentare.kdpacientiservice.domain.Pacienti;
+import com.karteladentare.kdpacientiservice.exceptions.PacientiExistsException;
 import com.karteladentare.kdpacientiservice.exceptions.PacientiNotFoundException;
 import com.karteladentare.kdpacientiservice.repository.PacientiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,16 @@ public class PacientiServiceImpl implements PacientiService {
     }
 
     @Override
-    public Pacienti shtoPacientin(Pacienti pacienti) {
+    public Pacienti shtoPacientin(Pacienti pacienti) throws PacientiExistsException {
+        // Test if a patient with same personal number exists
+        Optional<Pacienti> pacientiEgziston = pacientiRepository
+                .findByNumriPersonal(pacienti.getNumriPersonal());
+
+        if(pacientiEgziston.isPresent()) {
+            throw new PacientiExistsException("Pacienti me numer personal "
+                    + pacientiEgziston.get().getNumriPersonal() + " egizston");
+        }
+
         // set today as the date of registration
         LocalDate today = LocalDate.now();
         pacienti.setDataRegjistrimit(today);
