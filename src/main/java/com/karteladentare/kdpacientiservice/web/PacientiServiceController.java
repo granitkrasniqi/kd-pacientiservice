@@ -1,6 +1,8 @@
 package com.karteladentare.kdpacientiservice.web;
 
+import com.karteladentare.kdpacientiservice.clients.TerminiServiceRestTemplateClient;
 import com.karteladentare.kdpacientiservice.domain.Pacienti;
+import com.karteladentare.kdpacientiservice.domain.Termini;
 import com.karteladentare.kdpacientiservice.exceptions.PacientiExistsException;
 import com.karteladentare.kdpacientiservice.exceptions.PacientiNotFoundException;
 import com.karteladentare.kdpacientiservice.service.PacientiService;
@@ -16,6 +18,9 @@ public class PacientiServiceController {
 
     @Autowired
     private PacientiService pacientiService;
+
+    @Autowired
+    private TerminiServiceRestTemplateClient terminiServiceRestTemplateClient;
 
     @GetMapping
     public Iterable<Pacienti> kthePacientet() {
@@ -75,6 +80,11 @@ public class PacientiServiceController {
     @GetMapping("/numriPacienteve")
     public long numriTotalPacienteve() {
         return pacientiService.numriTotalPacienteve();
+    }
+
+    @GetMapping("/{pacientiId}/terminet")
+    public Iterable<Termini> terminetEPacientit(@PathVariable("pacientiId") Long pacientiId) {
+        return terminiServiceRestTemplateClient.getTerminetByPatientId(pacientiId);
     }
 
 

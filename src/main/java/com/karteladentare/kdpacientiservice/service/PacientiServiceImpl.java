@@ -35,7 +35,7 @@ public class PacientiServiceImpl implements PacientiService {
 
         if(pacientiEgziston.isPresent()) {
             throw new PacientiExistsException("Pacienti me numer personal "
-                    + pacientiEgziston.get().getNumriPersonal() + " egizston");
+                    + pacientiEgziston.get().getNumriPersonal() + " egziston !");
         }
 
         // set today as the date of registration
@@ -70,10 +70,11 @@ public class PacientiServiceImpl implements PacientiService {
 //        pacientiRepository.deleteById(pacientiId);
         Optional<Pacienti> pacientiOptional = pacientiRepository.findById(pacientiId);
         if (pacientiOptional.isPresent()) {
-            Pacienti p = pacientiOptional.get();
+//            Pacienti p = pacientiOptional.get();
             // set pacienti aktiv status to false
-            p.setAktiv(false);
-            pacientiRepository.save(p);
+//            p.setAktiv(false);
+//            pacientiRepository.save(p);
+            pacientiRepository.deleteById(pacientiId);
         } else {
             throw new PacientiNotFoundException("Pacienti nuk egziston");
         }

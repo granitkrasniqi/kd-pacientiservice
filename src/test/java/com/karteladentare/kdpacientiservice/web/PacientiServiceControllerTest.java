@@ -44,7 +44,8 @@ public class PacientiServiceControllerTest {
         when(pacientiService.ktheTeGjithPacientet()).thenReturn(Arrays.asList(new Pacienti(), new Pacienti()));
 
         // Perform request
-        mockMvc.perform(get("/v1/pacientet")).andExpect(status().isOk())
+        mockMvc.perform(get("/v1/pacientet"))
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$", hasSize(2)));
     }

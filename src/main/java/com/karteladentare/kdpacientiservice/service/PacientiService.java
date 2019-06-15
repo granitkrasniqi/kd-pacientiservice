@@ -7,7 +7,12 @@ import com.karteladentare.kdpacientiservice.exceptions.PacientiNotFoundException
 import java.util.List;
 
 public interface PacientiService {
+    /**
+     * Kthen te gjithe pacientet
+     * @return Te gjitha pacientet ne database
+     */
     List<Pacienti> ktheTeGjithPacientet();
+
 
     List<Pacienti> ktheTeGjithPacientetSipasAktiv(boolean aktiv);
 
