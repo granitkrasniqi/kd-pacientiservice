@@ -13,5 +13,6 @@ public interface PacientiRepository extends JpaRepository<Pacienti, Long> {
     @Query("SELECT p FROM Pacienti p WHERE p.aktiv = true")
     List<Pacienti> findAllAktiv();
     List<Pacienti> findAllByAktiv(boolean aktiv);
+    List<Pacienti> findAllByAdresa(String adresa);
     Optional<Pacienti> findByNumriPersonal(Long numriPersonal);
 }

@@ -39,8 +39,7 @@ public class PacientiServiceImpl implements PacientiService {
         }
 
         // set today as the date of registration
-        LocalDate today = LocalDate.now();
-        pacienti.setDataRegjistrimit(today);
+        pacienti.setDataRegjistrimit(LocalDate.now());
 
         // set aktiv attribute to true
         pacienti.setAktiv(true);
